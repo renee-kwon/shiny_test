@@ -1,0 +1,14 @@
+name: shiny_test
+title:
+username:
+account: reneekwon
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 8349908
+bundleId: 6860998
+url: https://reneekwon.shinyapps.io/shiny_test/
+when: 1676720557.53475
+lastSyncTime: 1676720557.53478
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: .gitattributes|.RData

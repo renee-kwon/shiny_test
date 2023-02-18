@@ -1,31 +1,22 @@
-library(shiny)
-
 ui <- fluidPage(
-  selectInput("dataset", label = "Dataset", choices = ls("package:datasets")),
-  verbatimTextOutput("summary"),
-  tableOutput("table")
+  sliderInput(inputId='slider',
+              label='I am a label',
+              min=0,
+              max=10,
+              value=5 ),
+  plotOutput(outputId = 'distplot')
 )
+
 server <- function(input, output, session) {
-  # Create a reactive expression
-  dataset <- reactive({
-    get(input$dataset, "package:datasets")
-  })
-  
-  output$summary <- renderPrint({
-    # Use a reactive expression by calling it like a function
-    summary(dataset())
-  })
-  
-  output$table <- renderTable({
-    dataset()
+  output$distplot <-  renderPlot({
+    x    <- faithful[, 2]
+    bins <- seq(min(x), max(x), length.out = input$slider + 1)
+    
+    # draw the histogram with the specified number of bins
+    hist(x, breaks = bins, col = 'darkgray', border = 'white',
+         xlab = 'Waiting time to next eruption (in mins)',
+         main = 'Histogram of waiting times')
   })
 }
-  
-output$table <- renderTable({
-    dataset <- get(input$dataset, "package:datasets")
-    dataset
-  })
-
 
 shinyApp(ui, server)
-
